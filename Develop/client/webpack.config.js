@@ -31,12 +31,12 @@ module.exports = () => {
         inject: true,
         name: 'Text Switch',
         short_name: 'TS',
-        description: 'This lets you take notse with JavaScript',
+        description: 'This lets you take notes with JavaScript',
         background_color: '#107896',
         publicPath: '/',
         icons: [
           {
-            src: path.resolve(''),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons')
           }
@@ -46,7 +46,21 @@ module.exports = () => {
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            leader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime']
+            }
+          }
+        }
       ],
     },
   };
